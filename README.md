@@ -98,6 +98,13 @@ jupyter notebook
 notebooks/analisis-kemiskinan.ipynb
 ```
 
+## 📊 Dashboard
+
+Hasil analisis data kemiskinan divisualisasikan dalam dashboard interaktif menggunakan Looker Studio.
+
+🔗 **Lihat Dashboard:** [Dashboard Analisis Kemiskinan](https://datastudio.google.com/reporting/6b7ec764-b513-4e50-835c-b2f42dcb3bf9)
+
+
 ## ✍️ Author
 
 **Dellia Putri Santoso**

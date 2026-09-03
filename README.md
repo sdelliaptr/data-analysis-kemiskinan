@@ -1,31 +1,31 @@
 # 📊 Analisis Kemiskinan Kabupaten/Kota di Indonesia
 
-Proyek Uji Kompetensi (UJIKOM) — Exploratory Data Analysis & Data Cleaning terhadap data kemiskinan dan indikator sosial-ekonomi di 514 kabupaten/kota, 34 provinsi di Indonesia.
+Proyek analisis data menggunakan Python untuk mengeksplorasi data kemiskinan dan indikator sosial-ekonomi pada tingkat kabupaten/kota di Indonesia.
 
-## 📌 Latar Belakang
+## 📌 Tentang Proyek
 
-Kemiskinan masih menjadi salah satu tantangan utama pembangunan di Indonesia, dengan tingkat yang sangat bervariasi antarwilayah. Proyek ini bertujuan menggali pola serta faktor sosial-ekonomi yang paling berhubungan dengan tingkat kemiskinan, sebagai dasar rekomendasi kebijakan maupun pemodelan lanjutan.
+Kemiskinan merupakan salah satu permasalahan sosial-ekonomi yang memiliki karakteristik berbeda di setiap wilayah. Proyek ini dilakukan untuk mengeksplorasi pola kemiskinan serta melihat hubungan antara tingkat kemiskinan dengan beberapa indikator sosial-ekonomi.
 
-**Rumusan masalah:**
-1. Bagaimana persebaran dan karakteristik tingkat kemiskinan di berbagai kabupaten/kota di Indonesia?
-2. Faktor sosial-ekonomi apa yang paling berhubungan dengan tingkat kemiskinan?
-3. Wilayah mana yang perlu menjadi prioritas intervensi?
+Analisis mencakup proses data understanding, data cleaning, exploratory data analysis (EDA), analisis korelasi, serta visualisasi data.
+
+## 🎯 Tujuan Analisis
+
+- Memahami karakteristik dan persebaran tingkat kemiskinan antarwilayah.
+- Mengidentifikasi indikator sosial-ekonomi yang memiliki hubungan dengan tingkat kemiskinan.
+- Membandingkan kondisi kemiskinan antarprovinsi dan kabupaten/kota.
+- Menghasilkan insight berdasarkan hasil eksplorasi dan analisis data.
 
 ## 🗂️ Dataset
 
-| Detail | Keterangan |
-|---|---|
-| Jumlah baris (sebelum cleaning) | 532 |
-| Jumlah kolom | 11 |
-| Level data | Kabupaten/Kota |
+Dataset berisi data tingkat kabupaten/kota dengan beberapa indikator sosial-ekonomi.
 
-**Kamus data:**
+### Variabel yang Digunakan
 
-| Kolom | Deskripsi |
+| Variabel | Deskripsi |
 |---|---|
 | `Provinsi` | Nama provinsi |
 | `KabKota` | Nama kabupaten/kota |
-| `Kemiskinan` | Persentase penduduk miskin (variabel target) |
+| `Kemiskinan` | Persentase penduduk miskin |
 | `RLS` | Rata-rata Lama Sekolah (tahun) |
 | `Pengeluaran` | Rata-rata pengeluaran per kapita |
 | `IPM` | Indeks Pembangunan Manusia |
@@ -35,46 +35,67 @@ Kemiskinan masih menjadi salah satu tantangan utama pembangunan di Indonesia, de
 | `TPT` | Tingkat Pengangguran Terbuka (%) |
 | `TPAK` | Tingkat Partisipasi Angkatan Kerja (%) |
 
-## 🧹 Alur Analisis
+## 🔍 Proses Analisis
 
-1. **Data Understanding** — struktur data, statistik deskriptif, pengecekan nilai unik, missing value, outlier (boxplot + IQR), dan data duplikat.
-2. **Data Cleaning**
-   - Missing value pada `IPM`, `UHH`, `Sanitasi`, `AirMinum` ditangani dengan **imputasi median**.
-   - Koreksi kesalahan input ekstrem: `Kemiskinan` Kota Medan (`834` → `8.34`, indikasi kesalahan format desimal).
-   - Outlier ekstrem pada `TPT` (beberapa nilai >90%) ditangani dengan **clipping/winsorizing** menggunakan batas IQR, outlier pada variabel lain dipertahankan karena masih merepresentasikan kondisi riil antarwilayah.
-   - 16 baris data duplikat dihapus.
-   - Dataset bersih disimpan sebagai `dataset_kemiskinan_clean.csv`.
-3. **Analisis Korelasi** — heatmap korelasi antar variabel numerik.
-4. **Exploratory Data Analysis (EDA)** — distribusi variabel, perbandingan antarprovinsi/wilayah, dan hubungan antar-indikator.
+### 1. Data Understanding
+- Memahami struktur dan karakteristik dataset.
+- Melakukan statistik deskriptif.
+- Memeriksa nilai unik.
+- Mengidentifikasi missing value.
+- Mendeteksi outlier menggunakan boxplot dan metode IQR.
+- Memeriksa data duplikat.
+
+### 2. Data Cleaning
+Beberapa proses yang dilakukan meliputi:
+
+- Menangani missing value pada variabel `IPM`, `UHH`, `Sanitasi`, dan `AirMinum` menggunakan imputasi median.
+- Mengoreksi nilai ekstrem pada data kemiskinan Kota Medan yang terindikasi sebagai kesalahan format desimal (`834` menjadi `8.34`).
+- Menangani outlier ekstrem pada `TPT` menggunakan clipping/winsorizing berdasarkan batas IQR.
+- Mempertahankan outlier pada variabel lain apabila masih merepresentasikan kondisi nyata antarwilayah.
+- Menghapus 16 baris data duplikat.
+
+### 3. Exploratory Data Analysis (EDA)
+Analisis eksploratif dilakukan untuk melihat:
+
+- Distribusi tingkat kemiskinan.
+- Perbandingan tingkat kemiskinan antarprovinsi.
+- Perbandingan karakteristik antarwilayah.
+- Hubungan antara kemiskinan dengan indikator sosial-ekonomi.
+
+### 4. Analisis Korelasi
+Analisis korelasi digunakan untuk melihat hubungan antara tingkat kemiskinan dengan variabel numerik lainnya melalui correlation matrix dan heatmap.
 
 ## 💡 Insight Utama
 
-- **Determinan kemiskinan terkuat**: `IPM` (r = -0.54), `Sanitasi` (r = -0.48), dan `UHH` (r = -0.40) memiliki korelasi negatif terkuat terhadap kemiskinan — wilayah dengan kualitas pembangunan manusia, kesehatan, dan sanitasi yang lebih baik cenderung punya kemiskinan lebih rendah.
-- **Kesenjangan wilayah timur-barat**: Rata-rata kemiskinan tertinggi konsisten berada di **Papua (±28.6%)**, **Papua Barat (±24.2%)**, **Nusa Tenggara Timur (±19.3%)**, dan **Maluku (±17.6%)**, jauh di atas provinsi lain.
-- **Kesenjangan kota-desa**: Seluruh 10 wilayah dengan IPM tertinggi adalah wilayah berstatus "Kota" (Yogyakarta, Banda Aceh, Kendari, dll), menunjukkan akses pendidikan/kesehatan/ekonomi yang lebih baik di perkotaan.
-- **Kantong kemiskinan lokal**: Beberapa kabupaten dengan kemiskinan tertinggi (Morowali, Situbondo, Banyu Asin) justru berada di provinsi dengan rata-rata kemiskinan yang tidak paling tinggi — mengindikasikan perlunya kebijakan berbasis kabupaten/kota, bukan hanya provinsi.
-- **IPM saja belum cukup**: Hubungan IPM–Kemiskinan negatif namun sebarannya cukup lebar pada rentang IPM menengah, menandakan faktor lain (geografis, struktur ekonomi lokal) turut berkontribusi.
+- `IPM` memiliki korelasi negatif paling kuat dengan tingkat kemiskinan (r = -0.54), diikuti oleh `Sanitasi` (r = -0.48) dan `UHH` (r = -0.40).
+- Beberapa provinsi seperti Papua, Papua Barat, Nusa Tenggara Timur, dan Maluku memiliki rata-rata tingkat kemiskinan yang relatif tinggi dibandingkan provinsi lainnya.
+- Wilayah dengan IPM tinggi didominasi oleh wilayah berstatus kota, yang menunjukkan adanya perbedaan karakteristik pembangunan antara wilayah perkotaan dan kabupaten.
+- Terdapat beberapa kabupaten/kota dengan tingkat kemiskinan tinggi meskipun rata-rata kemiskinan provinsinya tidak termasuk yang tertinggi. Hal ini menunjukkan adanya variasi kondisi kemiskinan di dalam suatu provinsi.
+- Hubungan negatif antara IPM dan kemiskinan menunjukkan adanya keterkaitan antara kualitas pembangunan manusia dengan tingkat kemiskinan, meskipun faktor lain seperti kondisi geografis dan struktur ekonomi lokal juga dapat berperan.
 
-## 🛠️ Tools & Library
+## 🛠️ Tools & Libraries
 
 - Python 3
-- `pandas`, `numpy` — manipulasi data
-- `seaborn`, `matplotlib` — visualisasi
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Jupyter Notebook
 
-## 📁 Struktur Repo
+## 📁 Struktur Repository
 
-```
-├── UJIKOM_DataKemiskinan_DelliaPutriSantoso.ipynb   # Notebook analisis lengkap
-├── Dataset_Kemiskinan (1).csv                        # Dataset mentah
-├── dataset_kemiskinan_clean.csv                       # Dataset hasil cleaning
-└── README.md
-```
+```text
+data-analysis-kemiskinan/
+├── README.md
+└── notebooks/
+    └── analisis-kemiskinan.ipynb
 
 ## ▶️ Cara Menjalankan
 
 ```bash
 pip install pandas numpy seaborn matplotlib
-jupyter notebook UJIKOM_DataKemiskinan_DelliaPutriSantoso.ipynb
+jupyter notebook
+notebooks/analisis-kemiskinan.ipynb
 ```
 
 ## ✍️ Author
